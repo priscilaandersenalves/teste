@@ -28,15 +28,12 @@ public class Santo {
 	@SerializedName("foto")
 	private String foto;
 	
-	@SerializedName("status")
-	private String status;
 	
 	public Santo() {
 		super();
 	}
 	
-	public Santo(Integer santoId, String nomeSanto, String descricao, Integer dia, Integer mes, String foto,
-			String status) {
+	public Santo(Integer santoId, String nomeSanto, String descricao, Integer dia, Integer mes, String foto) {
 		super();
 		this.santoId = santoId;
 		this.nomeSanto = nomeSanto;
@@ -44,7 +41,6 @@ public class Santo {
 		this.dia = dia;
 		this.mes = mes;
 		this.foto = foto;
-		this.status = status;
 	}
 
 	public Integer getSantoId() {
@@ -86,17 +82,11 @@ public class Santo {
 		this.foto = foto;
 	}
 
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
 
 	@Override
 	public String toString() {
 		return "Santo [santoId=" + santoId + ", nomeSanto=" + nomeSanto + ", descricao=" + descricao + ", dia=" + dia
-				+ ", mes=" + mes + ", foto=" + foto + ", status=" + status + "]";
+				+ ", mes=" + mes + ", foto=" + foto + "]";
 	}
 
 }

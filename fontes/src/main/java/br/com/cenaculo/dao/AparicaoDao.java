@@ -33,9 +33,9 @@ public class AparicaoDao implements IAparicao {
 		Connection dbConnection = null;
 		Statement statement = null;
 
-		String insertTableSQL = "INSERT INTO aparicao (nome, descricao, dia, mes, foto, status) VALUES ('"
-				+ aparicao.getNome() + "','" + aparicao.getDescricao() + "'," + aparicao.getDia() + "," + aparicao.getMes()
-				+ ",'" + aparicao.getFoto() + "','" + aparicao.getStatus() + "')";
+		String insertTableSQL = "INSERT INTO aparicaomaria (nome, descricao, dia, mes, ano,  foto) VALUES ('"
+				+ aparicao.getNome() + "','" + aparicao.getDescricao() + "'," + aparicao.getDia() + ","
+				+ aparicao.getMes() + "," + aparicao.getAno() + ",'" + aparicao.getFoto() + "')";
 
 		try {
 			dbConnection = con.conectarSQL();
@@ -67,30 +67,37 @@ public class AparicaoDao implements IAparicao {
 	}
 
 	@Override
-	public Aparicao searchAparicaobyDay(String dia) {
+	public Aparicao searchAparicaobyDay(String data) {
 		Aparicao aparicao = null;
 		Connection conn = con.conectarSQL();
 		ResultSet rs;
 		Statement stmt = null;
+		String diaSanto, mesSanto, anoSanto = null;
+		if (data.length() == 8) {
+			diaSanto = data.substring(0, 2);
+			mesSanto = data.substring(2, 4);
+			anoSanto = data.substring(4, 8);
+		} else {
+			diaSanto = data.substring(0, 2);
+			mesSanto = data.substring(2, 4);
+			anoSanto = data.substring(4, 6);
+		}
 
-		String diaSanto = dia.substring(0, 2);
-		String mesSanto = dia.substring(2, 4);
-		System.out.println(diaSanto + " " + mesSanto);
+		System.out.println(diaSanto + "/" + mesSanto + "/" + anoSanto);
 		try {
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery(
-					"SELECT idaparicao, nome, descricao, dia, mes, foto, status FROM cenaculo.aparicao  where dia = "
-							+ diaSanto + " and mes = " + mesSanto);
+			rs = stmt.executeQuery("SELECT id, nome, descricao, dia, mes,ano,  foto FROM aparicaomaria  where dia = "
+					+ diaSanto + " and mes = " + mesSanto + " and ano = " + anoSanto);
 
 			while (rs.next()) {
 				aparicao = new Aparicao();
-				aparicao.setIdaparicao(rs.getInt("idaparicao"));
+				aparicao.setIdaparicao(rs.getInt("id"));
 				aparicao.setNome(rs.getString("nome"));
 				aparicao.setDescricao(rs.getString("descricao"));
 				aparicao.setDia(rs.getInt("dia"));
 				aparicao.setMes(rs.getInt("mes"));
+				aparicao.setAno(rs.getInt("ano"));
 				aparicao.setFoto(rs.getString("foto"));
-				aparicao.setStatus(rs.getString("status"));
 			}
 		} catch (SQLException e) {
 			System.err.println("Got an exception! ");
@@ -116,17 +123,17 @@ public class AparicaoDao implements IAparicao {
 
 		try {
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT idaparicao, nome, descricao, dia, mes, foto, status FROM cenaculo.Aparicao");
+			rs = stmt.executeQuery("SELECT id, nome, descricao, dia, mes, ano, foto FROM aparicaomaria");
 
 			while (rs.next()) {
 				Aparicao aparicao = new Aparicao();
-				aparicao.setIdaparicao(rs.getInt("idaparicao"));
+				aparicao.setIdaparicao(rs.getInt("id"));
 				aparicao.setNome(rs.getString("nome"));
 				aparicao.setDescricao(rs.getString("descricao"));
 				aparicao.setDia(rs.getInt("dia"));
 				aparicao.setMes(rs.getInt("mes"));
+				aparicao.setAno(rs.getInt("ano"));
 				aparicao.setFoto(rs.getString("foto"));
-				aparicao.setStatus(rs.getString("status"));
 
 				listAparicao.add(aparicao);
 			}
@@ -152,11 +159,12 @@ public class AparicaoDao implements IAparicao {
 		try {
 			dbConnection = con.conectarSQL();
 			statement = dbConnection.createStatement();
-			
-			String sql = "UPDATE Aparicao SET  nome = '" + aparicao.getNome() + "', descricao = '"
-					+ aparicao.getDescricao() + "', dia = " + aparicao.getDia() + ", mes = " + aparicao.getMes() + ", foto = '"
-					+ aparicao.getFoto() + "', status = '" + aparicao.getStatus() + "' WHERE idaparicao = " + aparicao.getIdaparicao();
-			
+
+			String sql = "UPDATE aparicaomaria SET  nome = '" + aparicao.getNome() + "', descricao = '"
+					+ aparicao.getDescricao() + "', dia = " + aparicao.getDia() + ", mes = " + aparicao.getMes()
+					+ ",  ano = " + aparicao.getAno() + ", foto = '" + aparicao.getFoto() + "' WHERE id = "
+					+ aparicao.getIdaparicao();
+
 			System.out.println(sql);
 
 			// execute update SQL stetement
@@ -185,13 +193,13 @@ public class AparicaoDao implements IAparicao {
 	public void deleteAparicao(Aparicao aparicao) {
 		Connection dbConnection = null;
 		Statement statement = null;
-		
+
 		try {
 			dbConnection = con.conectarSQL();
 			statement = dbConnection.createStatement();
-			
-			String sql = "DELETE FROM aparicao WHERE idaparicao = " + aparicao.getIdaparicao();
-			
+
+			String sql = "DELETE FROM aparicaomaria WHERE id = " + aparicao.getIdaparicao();
+
 			System.out.println(sql);
 
 			// execute update SQL stetement

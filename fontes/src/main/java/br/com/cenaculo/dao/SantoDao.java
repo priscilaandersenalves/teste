@@ -32,9 +32,9 @@ public class SantoDao implements ISanto {
 		Connection dbConnection = null;
 		Statement statement = null;
 
-		String insertTableSQL = "INSERT INTO santo (nome, descricao, dia, mes, foto, status) VALUES ('"
+		String insertTableSQL = "INSERT INTO santodia (Nome, Historia, Dia, Mes, Foto) VALUES ('"
 				+ santo.getNomeSanto() + "','" + santo.getDescricao() + "'," + santo.getDia() + "," + santo.getMes()
-				+ ",'" + santo.getFoto() + "','" + santo.getStatus() + "')";
+				+ ",'" + santo.getFoto() + "')";
 
 		try {
 			dbConnection = con.conectarSQL();
@@ -78,18 +78,18 @@ public class SantoDao implements ISanto {
 		try {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(
-					"SELECT idsanto, nome, descricao, dia, mes, foto, status FROM cenaculo.santo  where dia = "
-							+ diaSanto + " and mes = " + mesSanto);
+					"SELECT id, Nome, Historia, Dia, Mes, Foto FROM santodia  where Dia = "
+							+ diaSanto + " and Mes = " + mesSanto);
 
 			while (rs.next()) {
 				santo = new Santo();
-				santo.setSantoId(rs.getInt("idsanto"));
-				santo.setNomeSanto(rs.getString("nome"));
-				santo.setDescricao(rs.getString("descricao"));
-				santo.setDia(rs.getInt("dia"));
-				santo.setMes(rs.getInt("mes"));
-				santo.setFoto(rs.getString("foto"));
-				santo.setStatus(rs.getString("status"));
+				santo.setSantoId(rs.getInt("id"));
+				santo.setNomeSanto(rs.getString("Nome"));
+				santo.setDescricao(rs.getString("Historia"));
+				santo.setDia(rs.getInt("Dia"));
+				santo.setMes(rs.getInt("Mes"));
+				santo.setFoto(rs.getString("Foto"));
+				
 			}
 		} catch (SQLException e) {
 			System.err.println("Got an exception! ");
@@ -115,17 +115,16 @@ public class SantoDao implements ISanto {
 
 		try {
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT idsanto, nome, descricao, dia, mes, foto, status FROM cenaculo.santo");
+			rs = stmt.executeQuery("SELECT id, Nome, Historia, Dia, Mes, Foto FROM santodia ");
 
 			while (rs.next()) {
 				Santo santo = new Santo();
-				santo.setSantoId(rs.getInt("idsanto"));
-				santo.setNomeSanto(rs.getString("nome"));
-				santo.setDescricao(rs.getString("descricao"));
-				santo.setDia(rs.getInt("dia"));
-				santo.setMes(rs.getInt("mes"));
-				santo.setFoto(rs.getString("foto"));
-				santo.setStatus(rs.getString("status"));
+				santo.setSantoId(rs.getInt("id"));
+				santo.setNomeSanto(rs.getString("Nome"));
+				santo.setDescricao(rs.getString("Historia"));
+				santo.setDia(rs.getInt("Dia"));
+				santo.setMes(rs.getInt("Mes"));
+				santo.setFoto(rs.getString("Foto"));
 
 				listSantos.add(santo);
 			}
@@ -154,9 +153,9 @@ public class SantoDao implements ISanto {
 			dbConnection = con.conectarSQL();
 			statement = dbConnection.createStatement();
 			
-			String sql = "UPDATE santo SET  nome = '" + santo.getNomeSanto() + "', descricao = '"
-					+ santo.getDescricao() + "', dia = " + santo.getDia() + ", mes = " + santo.getMes() + ", foto = '"
-					+ santo.getFoto() + "', status = '" + santo.getStatus() + "' WHERE idsanto = " + santo.getSantoId();
+			String sql = "UPDATE santodia SET  Nome = '" + santo.getNomeSanto() + "', Historia = '"
+					+ santo.getDescricao() + "', Dia = " + santo.getDia() + ", Mes = " + santo.getMes() + ", Foto = '"
+					+ santo.getFoto() + "'  WHERE id = " + santo.getSantoId();
 			
 			System.out.println(sql);
 
@@ -191,7 +190,7 @@ public class SantoDao implements ISanto {
 			dbConnection = con.conectarSQL();
 			statement = dbConnection.createStatement();
 			
-			String sql = "DELETE FROM santo WHERE idsanto = " + santo.getSantoId();
+			String sql = "DELETE FROM santodia WHERE id = " + santo.getSantoId();
 			
 			System.out.println(sql);
 

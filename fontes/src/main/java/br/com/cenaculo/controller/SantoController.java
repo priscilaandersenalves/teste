@@ -113,7 +113,7 @@ public class SantoController {
 	 * @param jsonEntrada
 	 * @return
 	 */
-	@RequestMapping(value = "/santos", method = RequestMethod.GET)
+	@RequestMapping(value = "/santosbyDay", method = RequestMethod.GET)
 	@ResponseBody
 	public String searchSantobyDay(@PathParam(value = "dia") String dia) {
 
@@ -145,7 +145,6 @@ public class SantoController {
 			Gson gson = new Gson();
 			try {
 				santoEntrada = gson.fromJson(jsonEntrada, Santo.class);
-				santoEntrada.setStatus("A");
 				
 			} catch (JsonSyntaxException e) {
 				e.printStackTrace();

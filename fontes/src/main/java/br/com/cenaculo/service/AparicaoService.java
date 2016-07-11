@@ -37,7 +37,6 @@ public class AparicaoService implements IAparicao {
 		Gson gson = new Gson();
 		try {
 			aparicao = gson.fromJson(aparicaoNovo, Aparicao.class);
-			aparicao.setStatus("A");
 		} catch (JsonSyntaxException e) {
 			e.printStackTrace();
 		}

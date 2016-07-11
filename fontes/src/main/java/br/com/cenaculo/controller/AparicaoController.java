@@ -36,7 +36,7 @@ public class AparicaoController {
 	private static final Logger logger = LoggerFactory.getLogger(AparicaoController.class);
 	private AparicaoService aparicaoService ;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/ap", method = RequestMethod.GET)
 	@ResponseBody
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
@@ -95,7 +95,7 @@ public class AparicaoController {
 
 	
 	
-	@RequestMapping(value = "/aparicao", method = RequestMethod.GET)
+	@RequestMapping(value = "/aparicaobyDay", method = RequestMethod.GET)
 	@ResponseBody
 	public String searchAparicaobyDay(@PathParam(value = "dia") String dia) {
 
@@ -128,7 +128,6 @@ public class AparicaoController {
 			Gson gson = new Gson();
 			try {
 				aparicaoEntrada = gson.fromJson(jsonEntrada, Aparicao.class);
-				aparicaoEntrada.setStatus("A");
 				
 			} catch (JsonSyntaxException e) {
 				e.printStackTrace();

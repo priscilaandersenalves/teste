@@ -25,28 +25,32 @@ public class Aparicao {
 	@SerializedName("mes")
 	private Integer mes;
 	
+	@SerializedName("ano")
+	private Integer ano;
+	
 	@SerializedName("foto")
 	private String foto;
-	
-	@SerializedName("status")
-	private String status;
-	
+
 	public Aparicao() {
 		super();
 	}
 	
 	
-	public Aparicao(Integer idaparicao, String nome, String descricao, Integer dia, Integer mes, String foto,
-			String status) {
+
+
+	public Aparicao(Integer idaparicao, String nome, String descricao, Integer dia, Integer mes, Integer ano,
+			String foto) {
 		super();
 		this.idaparicao = idaparicao;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.dia = dia;
 		this.mes = mes;
+		this.ano = ano;
 		this.foto = foto;
-		this.status = status;
 	}
+
+
 
 
 	public Integer getIdaparicao() {
@@ -96,18 +100,30 @@ public class Aparicao {
 		this.foto = foto;
 	}
 
-	public String getStatus() {
-		return status;
+	
+
+	public Integer getAno() {
+		return ano;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+
+
+
+
+	public void setAno(Integer ano) {
+		this.ano = ano;
 	}
+
+
 
 
 	@Override
 	public String toString() {
 		return "Aparicao [idaparicao=" + idaparicao + ", nome=" + nome + ", descricao=" + descricao + ", dia=" + dia
-				+ ", mes=" + mes + ", foto=" + foto + ", status=" + status + "]";
+				+ ", mes=" + mes + ", ano=" + ano + ", foto=" + foto + "]";
 	}
+
+
+
+
 
 }

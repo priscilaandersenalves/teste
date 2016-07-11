@@ -37,12 +37,10 @@ public class SantoService implements ISanto {
 		Gson gson = new Gson();
 		try {
 			santo = gson.fromJson(santoNovo, Santo.class);
-			santo.setStatus("A");
 		} catch (JsonSyntaxException e) {
 			e.printStackTrace();
 		}
 		santoDao.addSanto(santo);
-		
 		
 		return "Cadastrado";
 		
@@ -50,11 +48,8 @@ public class SantoService implements ISanto {
 
 	
 	public Santo searchSantobyDay(String dia) {
-
 		santoDao = new SantoDao();
-		
 		Santo santo = santoDao.searchSantobyDay(dia);
-		
 		return santo;
 	}
 
