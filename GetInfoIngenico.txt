@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<mensagem>
+ <header>
+  <id>
+   <processoorigem>0087340000100001</processoorigem>
+   <processodestino>1009</processodestino>
+   <processadordedadosorigem>1</processadordedadosorigem>
+   <dataclient>21/06/2016</dataclient>
+   <horaclient>04:42:22</horaclient>
+  </id>
+  <nroempresa>87</nroempresa>
+  <nroloja>34000010</nroloja>
+  <nropdv>1</nropdv>
+  <controlesequencia>0</controlesequencia>
+  <tipomensagem>solicitacao</tipomensagem>
+  <versaopos>POS 2.1 VA2.1.0907/03/2016 de 07/03/2016</versaopos>
+ </header>
+ <dados>
+  <post idtela="TelaAtivacao">
+   <campo id="tipoServico" value00="atualizacaotabelaspinpad" />
+   <campo id="PPOnlineHabilitadoAutomacao" value00="false" />
+   <campo id="PPOnlineHabilitadoClient" value00="false" />
+   <campo id="CPF_CNPJ" value00="1234567890" />
+   <campo id="PPGetDUKPT3DES" rc="00" value00="FFFFF9999900CA200056" />
+   <campo id="PPGetDUKPTDES" rc="42" value00="" />
+   <campo id="PPGetInfo03" rc="00" value00="CIELO 04660126204204002.11 141205108a01T00" />
+   <campo id="PPGetInfo00" rc="00" value00=
+"INGENICO            iWL280             C460684784661262042041.0804.19 141205    14259WL38594231     "
+"INGENICO            iWL280             C460684784661262042041.0804.19 141205    9999                " />
+   <campo id="PPGetTimeStamp03" rc="00" value00="          " />
+  </post>
+ </dados>
+</mensagem>
